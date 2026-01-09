@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import pilani_img from "./assets/trend_pilani.png";
+import pilani_img from "./assets/pilani_trend.png";
 import goa_img from "./assets/goa_trend.png";
 import hyd_img from "./assets/hyd_trend.png";
 
@@ -39,7 +39,8 @@ function Home() {
             return;
         }
 
-        if(score > 400){
+        // max possible score in bitsat is 426, highly unlikely anyone will score that much but still.
+        if(score > 426){
             setResult(["TOO_HIGH"]);
             return;
         }
@@ -97,7 +98,7 @@ function Home() {
                                 )}
 
                                 {result[0] == "TOO_HIGH" && (
-                                    <p> Score must be below 400. </p>
+                                    <p> Max Score attainable is 426. </p>
                                 )}
 
                                 {typeof result[0] === "object" &&

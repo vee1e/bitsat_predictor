@@ -5,9 +5,9 @@ function Header() {
     const location = useLocation();
 
     const map = {
-        "/": "BITSAT Branch Predictor 2026",
+        "/": "BITSAT-Predictor",
+        "/working": "How It Works",
         "/about": "About",
-        "/working": "How It Works"
     };
 
     const navButtonClass = ({ isActive }) =>
@@ -34,21 +34,19 @@ function Header() {
                         </button>
                     </NavLink>
 
-                    <NavLink to="/about" className={navButtonClass}>
-                        <button className="px-4 py-2 text-cyan-300 bg-slate-950 rounded-full hover:bg-slate-800 transition font-mono">
-                            About
-                        </button>
-                    </NavLink>
-
                     <NavLink to="/working" className={navButtonClass}>
                         <button className="px-4 py-2 text-cyan-300 bg-slate-950 rounded-full hover:bg-slate-800 transition font-mono">
                             Working
                         </button>
                     </NavLink>
-                </div>
 
+                    <NavLink to="/about" className={navButtonClass}>
+                        <button className="px-4 py-2 text-cyan-300 bg-slate-950 rounded-full hover:bg-slate-800 transition font-mono">
+                            About
+                        </button>
+                    </NavLink>
+                </div>
             </nav>
-            
         </header>
         );
     }
