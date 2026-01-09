@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
-import pilani_img from "./assets/pilani_trend.png";
-import goa_img from "./assets/goa_trend.png";
-import hyd_img from "./assets/hyd_trend.png";
 
 function Home() {
-
     const [input, setInput] = useState("");
     const [data, setData] = useState([]);
     const [result, setResult] = useState([]);
@@ -39,7 +35,6 @@ function Home() {
             return;
         }
 
-        // max possible score in bitsat is 426, highly unlikely anyone will score that much but still.
         if(score > 426){
             setResult(["TOO_HIGH"]);
             return;
@@ -55,71 +50,51 @@ function Home() {
         }
     };
 
-
     return (
-        <main className="mt-18 px-8 text-center">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <main className="min-h-screen flex items-start justify-center px-8 pt-24">
+        <div className="max-w-md w-full bg-slate-800 p-8 rounded-lg shadow-xl">
+                <h2 className="text-2xl text-blue-100 mb-6 font-mono font-semibold text-center">
+                    Enter Score
+                </h2>
 
-                <div className="mb-8">
-                    <h4 className="text-left font-mono from-neutral-900 mb-3"> 
-                        Trends for all 3 Campuses - Pilani, Goa and Hyderabad
-                    </h4>
-                    <div className="flex flex-col gap-6">
+                <input 
+                    type="number" 
+                    value={input} 
+                    onChange={(e) => setInput(e.target.value)}
+                    className="w-full px-4 py-2 rounded-lg text-black mb-4" 
+                    placeholder="Score"
+                />
 
-                        <img src={pilani_img} alt="Pilani trends" className="rounded-xl shadow-lg w-full max-w-2xl" />
-                        <img src={goa_img} alt="Goa trends" className="rounded-xl shadow-lg w-full max-w-2xl" />
+                <button 
+                    onClick={handlePredict} 
+                    className="w-full px-4 py-2 bg-violet-700 text-white rounded-lg hover:bg-violet-600 transition font-bold"
+                >
+                    Predict
+                </button>
+                
+                <div className="mt-6 text-blue-200 text-lg space-y-2 text-center overflow-y-auto max-h-[400px]">
+                    {result[0] === "INVALID" && (
+                        <p>Enter a valid positive score.</p>
+                    )}
 
-                        <img src={hyd_img} alt="Hyderabad trends" className="rounded-xl shadow-lg w-full max-w-2xl" />
-                    </div>
+                    {result[0] === "TOO_LOW" && (
+                        <p>Score too low for any branch :(</p>
+                    )}
+
+                    {result[0] === "TOO_HIGH" && (
+                        <p>Max Score attainable is 426.</p>
+                    )}
+
+                    {typeof result[0] === "object" &&
+                    result.map((item, index) => (
+                        <p key={index} className="py-1">
+                            {item.branch} - {item.campus}
+                        </p>
+                    ))}
                 </div>
-
-                <div className="max-w-md mx-auto bg-slate-800 p-5 rounded-lg shadow mt-9 flex flex-col min-w-[500px]">
-                    
-                    <h2 className="text-xl text-blue-100 mb-5 font-mono font-semibold">
-                        Enter Score
-                    </h2>
-
-                    <input type="number" value={input} onChange={(e) => setInput(e.target.value)}
-                        className="w-full px-4 py-2 rounded-lg text-beige mb-4" placeholder="Score"/>
-
-                    <button onClick={handlePredict} className="w-full px-4 py-2 bg-violet-700 text-white rounded-lg hover:bg-violet-600 transition font-bold" >
-                        Predict
-                    </button>
-                    
-                    <div className="mt-4 text-blue-200 text-lg space-y-2 text-center overflow-y-auto max-h-[809px]">
-                        {(
-                            <div className="mt-4 text-blue-200 text-lg space-y-2 text-center">
-                                {result[0] == "INVALID" && (
-                                    <p>Enter a valid positive score.</p>
-                                )}
-
-                                {result[0] == "TOO_LOW" && (
-                                    <p> Score too low for any branch :( </p>
-                                )}
-
-                                {result[0] == "TOO_HIGH" && (
-                                    <p> Max Score attainable is 426. </p>
-                                )}
-
-                                {typeof result[0] === "object" &&
-                                result.map((item, index) => (
-                                    <p key={index}>
-                                    {item.branch} - {item.campus}
-                                    </p>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-
-
-                </div>
-
             </div>
-
         </main>
     );
 }
 
 export default Home;
-
-
