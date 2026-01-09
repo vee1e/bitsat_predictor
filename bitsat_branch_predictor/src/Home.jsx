@@ -72,7 +72,7 @@ function Home() {
                     </div>
                 </div>
 
-                <div className="max-w-md mx-auto bg-[#242424] p-5 rounded-lg shadow mt-9">
+                <div className="max-w-md mx-auto bg-slate-800 p-5 rounded-lg shadow mt-9 flex flex-col min-w-[500px]">
                     
                     <h2 className="text-xl text-blue-100 mb-5 font-mono font-semibold">
                         Enter Score
@@ -85,29 +85,30 @@ function Home() {
                         Predict
                     </button>
                     
+                    <div className="mt-4 text-blue-200 text-lg space-y-2 text-center overflow-y-auto max-h-[809px]">
+                        {(
+                            <div className="mt-4 text-blue-200 text-lg space-y-2 text-center">
+                                {result[0] == "INVALID" && (
+                                    <p>Enter a valid positive score.</p>
+                                )}
 
-                    {(
-                        <div className="mt-4 text-blue-200 text-lg space-y-2 text-center">
-                            {result[0] == "INVALID" && (
-                                <p>Enter a valid positive score.</p>
-                            )}
+                                {result[0] == "TOO_LOW" && (
+                                    <p> Score too low for any branch :( </p>
+                                )}
 
-                            {result[0] == "TOO_LOW" && (
-                                <p> Score too low for any branch :( </p>
-                            )}
+                                {result[0] == "TOO_HIGH" && (
+                                    <p> Score must be below 400. </p>
+                                )}
 
-                            {result[0] == "TOO_HIGH" && (
-                                <p> Score must be below 400. </p>
-                            )}
-
-                            {typeof result[0] === "object" &&
-                            result.map((item, index) => (
-                                <p key={index}>
-                                {item.branch} - {item.campus}
-                                </p>
-                            ))}
-                        </div>
-                    )}
+                                {typeof result[0] === "object" &&
+                                result.map((item, index) => (
+                                    <p key={index}>
+                                    {item.branch} - {item.campus}
+                                    </p>
+                                ))}
+                            </div>
+                        )}
+                    </div>
 
 
                 </div>

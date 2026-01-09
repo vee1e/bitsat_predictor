@@ -10,7 +10,7 @@ import Working from "./Working.jsx"
 function App() {
   return (
     <>
-    <div className="min-h-screen bg-gradient-to-b from-violet-950 to-violet-700">
+    <div className="min-h-screen bg-gray-950">
       <Header></Header>
 
       <Routes>
