@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import pilani_img from "./assets/trend_pilani.png";
+import goa_img from "./assets/goa_trend.png";
+import hyd_img from "./assets/hyd_trend.png";
 
 function Home() {
 
@@ -64,24 +66,25 @@ function Home() {
                     <div className="flex flex-col gap-6">
 
                         <img src={pilani_img} alt="Pilani trends" className="rounded-xl shadow-lg w-full max-w-2xl" />
-                        {/* <img src={goa} alt="Goa trend" className="rounded-xl shadow-lg w-full max-w-md" />
+                        <img src={goa_img} alt="Goa trends" className="rounded-xl shadow-lg w-full max-w-2xl" />
 
-                        <img src={hyd} alt="Hyderabad trend" className="rounded-xl shadow-lg w-full max-w-md" /> */}
+                        <img src={hyd_img} alt="Hyderabad trends" className="rounded-xl shadow-lg w-full max-w-2xl" />
                     </div>
                 </div>
 
-                <div className="max-w-md mx-auto bg-[#242424] p-5 rounded-lg shadow">
+                <div className="max-w-md mx-auto bg-[#242424] p-5 rounded-lg shadow mt-9">
+                    
                     <h2 className="text-xl text-blue-100 mb-5 font-mono font-semibold">
                         Enter Score
                     </h2>
 
                     <input type="number" value={input} onChange={(e) => setInput(e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg text-beige mb-4" placeholder="Score"
-                    />
+                        className="w-full px-4 py-2 rounded-lg text-beige mb-4" placeholder="Score"/>
 
                     <button onClick={handlePredict} className="w-full px-4 py-2 bg-violet-700 text-white rounded-lg hover:bg-violet-600 transition font-bold" >
                         Predict
                     </button>
+                    
 
                     {(
                         <div className="mt-4 text-blue-200 text-lg space-y-2 text-center">
