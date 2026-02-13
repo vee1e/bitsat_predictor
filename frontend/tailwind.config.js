@@ -6,7 +6,7 @@ export default {
     extend: {
       fontFamily: {
         display: ['"JetBrains Mono"', "monospace"],
-        body: ['"Space Mono"', "monospace"],
+        body: ['"Iosevka"', '"JetBrains Mono"', "monospace"],
         mono: ['"JetBrains Mono"', "monospace"],
       },
       colors: {

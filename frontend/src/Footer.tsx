@@ -2,31 +2,30 @@ import { Github } from "lucide-react";
 
 function Footer() {
   return (
-    <footer className="border-t-4 border-black dark:border-white bg-[var(--brutal-bg)] mt-auto py-12">
-      <div className="brutal-container flex flex-col md:flex-row justify-between items-center gap-8">
-        <div className="text-center md:text-left">
-          <h3 className="brutal-heading-sm mb-2">BITSAT PREDICTOR</h3>
-          <p className="brutal-text-sm max-w-xs">
-            Helping students make informed choices with data-driven predictions.
+    <footer className="border-t border-[var(--brutal-border)] bg-[var(--brutal-bg)] mt-auto py-10">
+      <div className="brutal-container flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div className="text-center sm:text-left">
+          <h3 className="font-display text-xs font-bold tracking-wider uppercase text-[var(--brutal-text-secondary)] mb-1">
+            BITSAT PREDICTOR
+          </h3>
+          <p className="text-xs text-[var(--brutal-text-muted)]">
+            Data-driven branch predictions.
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center gap-4">
+        <div className="flex items-center gap-4">
           <a
-            href="https://github.com/PranavU-Coder"
+            href="https://github.com/PranavU-Coder/bitsat_predictor"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 border-2 border-[var(--brutal-border)] hover:bg-[var(--brutal-accent)] hover:text-white transition-all shadow-[2px_2px_0_var(--brutal-shadow)] hover:shadow-[1px_1px_0_var(--brutal-shadow)] hover:translate-x-[1px] hover:translate-y-[1px]"
-            aria-label="GitHub"
+            className="w-8 h-8 flex items-center justify-center border border-[var(--brutal-border)] rounded-[10px] text-[var(--brutal-text-muted)] hover:text-[var(--brutal-text)] hover:border-[#3f3f46] transition-all"
+            aria-label="GitHub Repository"
           >
-            <Github size={20} />
+            <Github size={14} />
           </a>
-          <div className="text-center md:text-right">
-            <p className="brutal-text-sm font-bold">
-              &copy; {new Date().getFullYear()} PREDICTOR
-            </p>
-            <p className="brutal-text-sm text-[var(--brutal-text-muted)]">
-              ALL RIGHTS RESERVED
+          <div className="text-right">
+            <p className="text-xs font-medium text-[var(--brutal-text-secondary)]">
+              &copy; {new Date().getFullYear()} Predictor
             </p>
           </div>
         </div>

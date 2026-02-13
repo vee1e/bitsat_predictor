@@ -1,11 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DynamicDropdownForm from "./Dropdown";
 import Plotly from "plotly.js-basic-dist";
 import createPlotlyComponent from "react-plotly.js/factory";
 import { useTheme } from "@/lib/themeContext";
 
-// Define locally if imported one causes issues, but try to use import first if possible.
-// Actually, to be safe and avoid "Module not found" if utils is missing, I'll define a minimal interface or use any.
 interface PlotParams {
   data?: any[];
   layout?: any;
@@ -33,11 +31,19 @@ function GraphPlot() {
   const { theme } = useTheme();
   const [graph, setGraph] = useState<PlotParams>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [formData, setForm] = useState<{ campus: number; [key: string]: any }>({
+  const [formData, setForm] = useState<{ campus: number;[key: string]: any }>({
     campus: PILANI,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   async function loadData() {
     setLoading(true);
@@ -59,15 +65,36 @@ function GraphPlot() {
     }
   }
 
-  // Determine Plotly colors based on theme
-  const bgColor = theme === "dark" ? "#0a0a0a" : "#ffffff";
+  const bgColor = theme === "dark" ? "#09090b" : "#ffffff";
   const textColor = theme === "dark" ? "#ffffff" : "#000000";
-  const gridColor = theme === "dark" ? "#333333" : "#e0e0e0";
+  const gridColor = theme === "dark" ? "#27272a" : "#e0e0e0";
+
+  const legendConfig = isMobile
+    ? {
+      orientation: "h" as const,
+      yanchor: "top" as const,
+      y: -0.3,
+      xanchor: "center" as const,
+      x: 0.5,
+      font: { family: '"Iosevka", monospace', color: textColor, size: 10 },
+      bgcolor: "transparent",
+      borderwidth: 0,
+    }
+    : {
+      font: { family: '"Iosevka", monospace', color: textColor },
+      bgcolor: bgColor,
+      bordercolor: textColor,
+      borderwidth: 1,
+    };
+
+  const margins = isMobile
+    ? { l: 40, r: 8, t: 20, b: 80 }
+    : { l: 50, r: 10, t: 30, b: 50 };
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      {/* SELECTION PANEL - NO BORDER/SHADOW per instructions */}
-      <div className="bg-[var(--brutal-bg-secondary)] p-6 mb-8 text-center">
+      {/* SELECTION PANEL */}
+      <div className="bg-[var(--brutal-bg-secondary)]/60 backdrop-blur-xl border border-[var(--brutal-border)] rounded-[10px] p-6 mb-8 w-full text-center">
         <h2 className="brutal-heading-md mb-6">PLOT TRENDS</h2>
         <div className="flex flex-col items-center gap-4">
           <p className="font-bold uppercase">Select Campus To Visualize:</p>
@@ -88,17 +115,17 @@ function GraphPlot() {
         )}
       </div>
 
-      {/* PLOT CONTAINER - BRUTAL BOX */}
+      {/* PLOT CONTAINER */}
       {isLoaded && graph.data && (
-        <div className="brutal-box p-4 bg-[var(--brutal-bg)]">
-          <div className="w-full h-[500px] relative">
+        <div className="brutal-box p-2 sm:p-4 bg-[var(--brutal-bg)] overflow-hidden">
+          <div className="w-full h-[350px] sm:h-[400px] md:h-[500px] relative">
             <Plot
               data={graph.data.map((trace: any) => ({
                 ...trace,
-                line: { ...trace.line, width: 3 }, // Thicker lines for brutalist feel
+                line: { ...trace.line, width: isMobile ? 2 : 3 },
                 marker: {
                   ...trace.marker,
-                  size: 8,
+                  size: isMobile ? 5 : 8,
                   line: { width: 1, color: textColor },
                 },
               }))}
@@ -108,23 +135,24 @@ function GraphPlot() {
                 plot_bgcolor: bgColor,
                 paper_bgcolor: bgColor,
                 font: {
-                  family: '"Space Mono", monospace',
+                  family: '"Iosevka", monospace',
                   color: textColor,
-                  size: 12,
+                  size: isMobile ? 10 : 12,
                 },
                 xaxis: {
                   ...graph.layout?.xaxis,
                   gridcolor: gridColor,
                   zerolinecolor: gridColor,
                   tickfont: {
-                    family: '"Space Mono", monospace',
+                    family: '"Iosevka", monospace',
                     color: textColor,
+                    size: isMobile ? 9 : 12,
                   },
                   title: {
                     text: "Year",
                     font: {
                       family: '"JetBrains Mono", monospace',
-                      size: 14,
+                      size: isMobile ? 11 : 14,
                       color: textColor,
                     },
                   },
@@ -134,26 +162,24 @@ function GraphPlot() {
                   gridcolor: gridColor,
                   zerolinecolor: gridColor,
                   tickfont: {
-                    family: '"Space Mono", monospace',
+                    family: '"Iosevka", monospace',
                     color: textColor,
+                    size: isMobile ? 9 : 12,
                   },
                   title: {
                     text: "Cutoff Score",
                     font: {
                       family: '"JetBrains Mono", monospace',
-                      size: 14,
+                      size: isMobile ? 11 : 14,
                       color: textColor,
                     },
                   },
                 },
                 legend: {
                   ...graph.layout?.legend,
-                  font: { family: '"Space Mono", monospace', color: textColor },
-                  bgcolor: bgColor,
-                  bordercolor: textColor,
-                  borderwidth: 2,
+                  ...legendConfig,
                 },
-                margin: { l: 60, r: 20, t: 40, b: 60 },
+                margin: margins,
                 autosize: true,
               }}
               config={{

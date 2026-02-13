@@ -1,6 +1,3 @@
-import srihari from "@/assets/team/Golden-purple.png";
-import pranav from "@/assets/team/PranavU-Coder.png";
-
 export type TeamMemberProps = {
   image: string;
   name: string;
@@ -11,7 +8,7 @@ export type TeamMemberProps = {
 
 export const TEAM_MEMBERS: TeamMemberProps[] = [
   {
-    image: pranav,
+    image: "https://github.com/PranavU-Coder.png",
     name: "Pranav",
     role: "Lead",
     githubLink: "https://github.com/PranavU-Coder",
@@ -19,11 +16,18 @@ export const TEAM_MEMBERS: TeamMemberProps[] = [
       "Progenitor of the idea, created the ML-model for predictions and contributed to the website.",
   },
   {
-    image: srihari,
-    name: "Golden Purple",
-    role: "Co-Lead",
-    githubLink: "https://github.com/Golden-purple",
-    description: "Helped in model-tuning and creator of the website.",
+    image: "https://github.com/ObnoxiousOrca.png",
+    name: "Arkadeep",
+    role: "Contributor",
+    githubLink: "https://github.com/ObnoxiousOrca",
+    description: "Contributed to the project's development and formulation.",
+  },
+  {
+    image: "https://github.com/vee1e.png",
+    name: "Lakshit",
+    role: "Contributor",
+    githubLink: "https://github.com/vee1e",
+    description: "Worked on the frontend development and design of the website.",
   },
 ] as const;
 
@@ -43,7 +47,7 @@ export interface PlotParams {
 }
 
 export const gotoButtonStyle =
-  "m-1 cursor-pointer bg-purple-800 border-2 text-black border-purple-950 w-[40px] h-[40px] rounded-xl flex justify-center items-center enabled:hover:bg-purple-600 enabled:active:bg-purple-800 disabled:transition-opacity disabled:opacity-60 active:transition-color hover:transition-color enabled:transition-opacity disabled:cursor-default";
+  "m-1 cursor-pointer bg-[var(--brutal-bg-tertiary)] border border-[var(--brutal-border)] text-[var(--brutal-text)] w-[40px] h-[40px] rounded-[10px] flex justify-center items-center enabled:hover:bg-[var(--brutal-accent)] enabled:active:bg-[var(--brutal-accent-hover)] disabled:opacity-40 transition-all disabled:cursor-default";
 
 export const submitButtonStyle =
-  "m-2 cursor-pointer bg-purple-800 border-2 border-purple-950 hover:bg-purple-600 hover:transition active:bg-purple-900 active:transition w-[150px] h-[40px] rounded-xl";
+  "m-2 cursor-pointer bg-[var(--brutal-accent)] border border-[var(--brutal-accent)] hover:bg-[var(--brutal-accent-hover)] active:bg-[var(--brutal-accent)] text-white w-[150px] h-[40px] rounded-[10px] transition-all font-medium";

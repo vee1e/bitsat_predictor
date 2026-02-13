@@ -90,7 +90,7 @@ function PredictTable() {
   return (
     <div className="w-full max-w-4xl mx-auto">
       {/* SELECTION PANEL - NO BORDER/SHADOW per instructions */}
-      <div className="bg-[var(--brutal-bg-secondary)] p-6 mb-8">
+      <div className="bg-[var(--brutal-bg-secondary)]/60 backdrop-blur-xl border border-[var(--brutal-border)] rounded-[10px] p-6 mb-8 w-full">
         <h2 className="brutal-heading-md mb-6 text-center">
           CHECK PREDICTIONS
         </h2>
@@ -120,7 +120,7 @@ function PredictTable() {
               <tr>
                 <th>Campus</th>
                 <th>Branch</th>
-                <th className="text-right">Marks</th>
+                <th style={{ textAlign: 'center' }}>Marks</th>
               </tr>
             </thead>
             <tbody>
@@ -128,7 +128,7 @@ function PredictTable() {
                 <tr key={idx}>
                   <td>{row[0]}</td>
                   <td>{row[1]}</td>
-                  <td className="text-right font-bold">{row[2]}</td>
+                  <td style={{ textAlign: 'center' }} className="font-bold">{row[2]}</td>
                 </tr>
               ))}
             </tbody>
@@ -175,11 +175,10 @@ function PredictTable() {
                   <button
                     key={p}
                     onClick={() => goToPage(p)}
-                    className={`w-8 h-8 flex items-center justify-center font-bold border-2 border-[var(--brutal-border)] transition-all ${
-                      p === activePage
-                        ? "bg-[var(--brutal-text)] text-[var(--brutal-bg)]"
-                        : "bg-[var(--brutal-bg)] hover:bg-[var(--brutal-bg-secondary)]"
-                    }`}
+                    className={`w-8 h-8 flex items-center justify-center font-bold border-2 border-[var(--brutal-border)] transition-all ${p === activePage
+                      ? "bg-[var(--brutal-text)] text-[var(--brutal-bg)]"
+                      : "bg-[var(--brutal-bg)] hover:bg-[var(--brutal-bg-secondary)]"
+                      }`}
                   >
                     {p}
                   </button>

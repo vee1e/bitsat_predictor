@@ -1,30 +1,34 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap");
+@import "@fontsource/iosevka/400.css";
+@import "@fontsource/iosevka/500.css";
+@import "@fontsource/iosevka/700.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ============================================
-   BRUTALIST THEME SYSTEM
-   Sharp, raw, unapologetic design
+   REFINED DARK THEME
+   Minimal, clean, intentional
    ============================================ */
 
 :root {
-  /* Brutalist Dark Mode (Forced) */
-  --brutal-bg: #0a0a0a;
-  --brutal-bg-secondary: #141414;
-  --brutal-bg-tertiary: #1f1f1f;
-  --brutal-text: #ffffff;
-  --brutal-text-secondary: #cccccc;
-  --brutal-text-muted: #888888;
-  --brutal-accent: #ff0000;
-  --brutal-accent-hover: #ff3333;
-  --brutal-border: #ffffff;
-  --brutal-shadow: #ffffff;
+  --brutal-bg: #09090b;
+  --brutal-bg-secondary: #111113;
+  --brutal-bg-tertiary: #1a1a1e;
+  --brutal-text: #fafafa;
+  --brutal-text-secondary: #a1a1aa;
+  --brutal-text-muted: #52525b;
+  --brutal-accent: #ef4444;
+  --brutal-accent-hover: #f87171;
+  --brutal-border: #27272a;
+  --brutal-shadow: transparent;
 
   --font-display: "JetBrains Mono", monospace;
-  --font-body: "Space Mono", monospace;
+  --font-body: "Iosevka", "JetBrains Mono", monospace;
   --font-mono: "JetBrains Mono", monospace;
+
+  --radius: 10px;
 }
 
 /* ============================================
@@ -48,68 +52,54 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   font-weight: 400;
-  letter-spacing: -0.02em;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Brutalist Scrollbar */
+/* Minimal Scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--brutal-bg-secondary);
-  border-left: 2px solid var(--brutal-border);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--brutal-text);
-  border: 2px solid var(--brutal-border);
+  background: var(--brutal-border);
+  border-radius: var(--radius);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--brutal-accent);
+  background: var(--brutal-text-muted);
 }
 
 /* ============================================
-   BRUTALIST UTILITY CLASSES
+   UTILITY CLASSES — REFINED
    ============================================ */
 
 .brutal-box {
   background: var(--brutal-bg);
-  border: 3px solid var(--brutal-border);
-  box-shadow: 6px 6px 0 var(--brutal-shadow);
-  transition: all 0.15s ease;
+  border: 1px solid var(--brutal-border);
+  border-radius: var(--radius);
+  transition: border-color 0.2s ease;
 }
 
 .brutal-box:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 8px 8px 0 var(--brutal-shadow);
-}
-
-.brutal-box:active {
-  transform: translate(4px, 4px);
-  box-shadow: 2px 2px 0 var(--brutal-shadow);
+  border-color: #3f3f46;
 }
 
 .brutal-box-sm {
-  background: var(--brutal-bg);
-  border: 2px solid var(--brutal-border);
-  box-shadow: 4px 4px 0 var(--brutal-shadow);
-  transition: all 0.15s ease;
+  background: var(--brutal-bg-secondary);
+  border: 1px solid var(--brutal-border);
+  border-radius: var(--radius);
+  transition: border-color 0.2s ease;
 }
 
 .brutal-box-sm:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 5px 5px 0 var(--brutal-shadow);
-}
-
-.brutal-box-sm:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--brutal-shadow);
+  border-color: #3f3f46;
 }
 
 .brutal-btn {
@@ -117,73 +107,60 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 16px 32px;
+  padding: 12px 24px;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background: var(--brutal-bg);
+  letter-spacing: 0.04em;
+  background: transparent;
   color: var(--brutal-text);
-  border: 3px solid var(--brutal-border);
-  box-shadow: 4px 4px 0 var(--brutal-shadow);
+  border: 1px solid var(--brutal-border);
+  border-radius: var(--radius);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 
-.brutal-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: var(--brutal-accent);
-  transition: left 0.3s ease;
-  z-index: -1;
-}
-
-.brutal-btn:hover::before {
-  left: 0;
-}
-
 .brutal-btn:hover {
+  background: var(--brutal-bg-tertiary);
+  border-color: #3f3f46;
   color: #ffffff;
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 var(--brutal-shadow);
 }
 
 .brutal-btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--brutal-shadow);
+  transform: scale(0.98);
 }
 
 .brutal-btn-primary {
   background: var(--brutal-text);
   color: var(--brutal-bg);
+  border-color: var(--brutal-text);
 }
 
 .brutal-btn-primary:hover {
-  background: var(--brutal-accent);
+  background: #e4e4e7;
+  border-color: #e4e4e7;
+  color: var(--brutal-bg);
 }
 
 .brutal-input {
   width: 100%;
-  padding: 16px 20px;
+  padding: 12px 16px;
   font-family: var(--font-body);
   font-size: 14px;
-  background: var(--brutal-bg);
+  background: var(--brutal-bg-secondary);
   color: var(--brutal-text);
-  border: 3px solid var(--brutal-border);
+  border: 1px solid var(--brutal-border);
+  border-radius: var(--radius);
   outline: none;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .brutal-input:focus {
-  box-shadow: 4px 4px 0 var(--brutal-accent);
-  transform: translate(-2px, -2px);
+  border-color: var(--brutal-accent);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
 .brutal-input::placeholder {
@@ -191,70 +168,58 @@ body {
 }
 
 .brutal-card {
-  background: var(--brutal-bg);
-  border: 3px solid var(--brutal-border);
-  box-shadow: 6px 6px 0 var(--brutal-shadow);
-  padding: 32px;
+  background: var(--brutal-bg-secondary);
+  border: 1px solid var(--brutal-border);
+  border-radius: var(--radius);
+  padding: 28px;
   position: relative;
+  transition: all 0.2s ease;
 }
 
-.brutal-card::after {
-  content: "";
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  right: -8px;
-  bottom: -8px;
-  border: 2px solid var(--brutal-border);
-  z-index: -1;
-  opacity: 0.3;
+.brutal-card:hover {
+  border-color: #3f3f46;
 }
 
 .brutal-tag {
   display: inline-block;
-  padding: 4px 12px;
+  padding: 4px 10px;
   font-family: var(--font-display);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   background: var(--brutal-accent);
   color: #ffffff;
-  border: 2px solid var(--brutal-border);
+  border-radius: var(--radius);
 }
 
 .brutal-tag-outline {
   background: transparent;
-  color: var(--brutal-text);
+  color: var(--brutal-text-secondary);
+  border: 1px solid var(--brutal-border);
 }
 
 .brutal-line {
-  height: 3px;
+  height: 1px;
   background: var(--brutal-border);
   width: 100%;
 }
 
 .brutal-line-accent {
-  background: var(--brutal-accent);
+  background: linear-gradient(90deg, var(--brutal-accent), transparent);
 }
 
 .brutal-grid-bg {
   background-color: var(--brutal-bg);
   background-image:
-    linear-gradient(#2a2a2a 1px, transparent 1px),
-    linear-gradient(90deg, #2a2a2a 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(rgba(39, 39, 42, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(39, 39, 42, 0.4) 1px, transparent 1px);
+  background-size: 60px 60px;
   background-position: center center;
 }
 
 .brutal-stripe-bg {
-  background: repeating-linear-gradient(
-    45deg,
-    var(--brutal-bg),
-    var(--brutal-bg) 10px,
-    var(--brutal-bg-secondary) 10px,
-    var(--brutal-bg-secondary) 20px
-  );
+  background: var(--brutal-bg);
 }
 
 /* ============================================
@@ -263,25 +228,25 @@ body {
 
 .brutal-heading-xl {
   font-family: var(--font-display);
-  font-size: clamp(48px, 10vw, 120px);
-  font-weight: 800;
-  line-height: 0.9;
+  font-size: clamp(40px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 0.95;
   letter-spacing: -0.04em;
   text-transform: uppercase;
 }
 
 .brutal-heading-lg {
   font-family: var(--font-display);
-  font-size: clamp(32px, 6vw, 72px);
+  font-size: clamp(28px, 5vw, 56px);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: -0.03em;
   text-transform: uppercase;
 }
 
 .brutal-heading-md {
   font-family: var(--font-display);
-  font-size: clamp(24px, 4vw, 48px);
+  font-size: clamp(20px, 3.5vw, 36px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -289,23 +254,23 @@ body {
 
 .brutal-heading-sm {
   font-family: var(--font-display);
-  font-size: clamp(18px, 3vw, 24px);
+  font-size: clamp(14px, 2vw, 18px);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.3;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
 
 .brutal-text-lg {
   font-family: var(--font-body);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.7;
 }
 
 .brutal-text {
   font-family: var(--font-body);
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .brutal-text-sm {
@@ -313,111 +278,66 @@ body {
   font-size: 12px;
   line-height: 1.5;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
 }
 
 /* ============================================
    ANIMATIONS
    ============================================ */
 
-@keyframes brutal-flash {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-  }
-}
-
 @keyframes brutal-slide-up {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(24px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes brutal-slide-left {
+@keyframes brutal-fade-in {
   from {
     opacity: 0;
-    transform: translateX(-40px);
   }
+
   to {
     opacity: 1;
-    transform: translateX(0);
   }
-}
-
-@keyframes brutal-slide-right {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes brutal-glitch {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-3px, 3px);
-  }
-  40% {
-    transform: translate(-3px, -3px);
-  }
-  60% {
-    transform: translate(3px, 3px);
-  }
-  80% {
-    transform: translate(3px, -3px);
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-.brutal-animate-flash {
-  animation: brutal-flash 2s ease-in-out infinite;
 }
 
 .brutal-animate-up {
-  animation: brutal-slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: brutal-slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.brutal-animate-left {
-  animation: brutal-slide-left 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.brutal-animate-right {
-  animation: brutal-slide-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.brutal-animate-fade {
+  animation: brutal-fade-in 0.4s ease forwards;
 }
 
 /* Stagger delays */
 .brutal-stagger-1 {
   animation-delay: 0ms;
 }
+
 .brutal-stagger-2 {
-  animation-delay: 100ms;
+  animation-delay: 80ms;
 }
+
 .brutal-stagger-3 {
-  animation-delay: 200ms;
+  animation-delay: 160ms;
 }
+
 .brutal-stagger-4 {
-  animation-delay: 300ms;
+  animation-delay: 240ms;
 }
+
 .brutal-stagger-5 {
-  animation-delay: 400ms;
+  animation-delay: 320ms;
 }
+
 .brutal-stagger-6 {
-  animation-delay: 500ms;
+  animation-delay: 400ms;
 }
 
 /* ============================================
@@ -430,8 +350,9 @@ body {
 }
 
 :focus-visible {
-  outline: 3px solid var(--brutal-accent);
-  outline-offset: 4px;
+  outline: 2px solid var(--brutal-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius);
 }
 
 /* ============================================
@@ -442,38 +363,37 @@ body {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--brutal-border);
 }
 
 .brutal-table th {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  padding: 20px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 14px 16px;
   text-align: left;
-  background: var(--brutal-text);
-  color: var(--brutal-bg);
-  border: 3px solid var(--brutal-border);
+  background: var(--brutal-bg-secondary);
+  color: var(--brutal-text-secondary);
+  border-bottom: 1px solid var(--brutal-border);
 }
 
 .brutal-table td {
-  padding: 16px 20px;
-  border: 3px solid var(--brutal-border);
-  border-top: none;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--brutal-border);
   background: var(--brutal-bg);
+  font-size: 13px;
+}
+
+.brutal-table tr:last-child td {
+  border-bottom: none;
 }
 
 .brutal-table tr:hover td {
   background: var(--brutal-bg-secondary);
-}
-
-.brutal-table tr:nth-child(even) td {
-  background: var(--brutal-bg-secondary);
-}
-
-.brutal-table tr:nth-child(even):hover td {
-  background: var(--brutal-bg-tertiary);
 }
 
 /* ============================================
@@ -482,28 +402,26 @@ body {
 
 .brutal-nav-link {
   position: relative;
-  padding: 12px 20px;
+  padding: 8px 16px;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 13px;
+  font-weight: 500;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--brutal-text);
+  letter-spacing: 0.04em;
+  color: var(--brutal-text-muted);
   text-decoration: none;
-  border: 3px solid transparent;
-  transition: all 0.15s ease;
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
 }
 
 .brutal-nav-link:hover {
-  border-color: var(--brutal-border);
-  box-shadow: 4px 4px 0 var(--brutal-shadow);
-  transform: translate(-2px, -2px);
+  color: var(--brutal-text);
+  background: var(--brutal-bg-tertiary);
 }
 
 .brutal-nav-link.active {
-  background: var(--brutal-text);
-  color: var(--brutal-bg);
-  border-color: var(--brutal-border);
+  color: var(--brutal-text);
+  background: var(--brutal-bg-tertiary);
 }
 
 /* ============================================
@@ -512,61 +430,62 @@ body {
 
 .brutal-corner {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  border: 3px solid var(--brutal-accent);
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--brutal-accent);
+  opacity: 0.3;
 }
 
 .brutal-corner-tl {
-  top: -3px;
-  left: -3px;
+  top: -1px;
+  left: -1px;
   border-right: none;
   border-bottom: none;
 }
 
 .brutal-corner-tr {
-  top: -3px;
-  right: -3px;
+  top: -1px;
+  right: -1px;
   border-left: none;
   border-bottom: none;
 }
 
 .brutal-corner-bl {
-  bottom: -3px;
-  left: -3px;
+  bottom: -1px;
+  left: -1px;
   border-right: none;
   border-top: none;
 }
 
 .brutal-corner-br {
-  bottom: -3px;
-  right: -3px;
+  bottom: -1px;
+  right: -1px;
   border-left: none;
   border-top: none;
 }
 
 .brutal-cross {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
 }
 
 .brutal-cross::before,
 .brutal-cross::after {
   content: "";
   position: absolute;
-  background: var(--brutal-accent);
+  background: var(--brutal-border);
 }
 
 .brutal-cross::before {
   width: 100%;
-  height: 4px;
+  height: 1px;
   top: 50%;
   transform: translateY(-50%);
 }
 
 .brutal-cross::after {
-  width: 4px;
+  width: 1px;
   height: 100%;
   left: 50%;
   transform: translateX(-50%);
@@ -577,19 +496,154 @@ body {
    ============================================ */
 
 .brutal-container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding-inline: 20px;
 }
 
 @media (min-width: 768px) {
   .brutal-container {
-    padding: 0 48px;
+    padding-inline: 32px;
   }
 }
 
 @media (min-width: 1024px) {
   .brutal-container {
-    padding: 0 64px;
+    padding-inline: 48px;
+  }
+}
+
+/* ============================================
+   MOBILE HAMBURGER MENU
+   ============================================ */
+
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 9, 11, 0.95);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.mobile-nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 8px;
+}
+
+.mobile-nav-link {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--brutal-text-muted);
+  text-decoration: none;
+  padding: 16px 32px;
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.mobile-nav-overlay.open .mobile-nav-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-nav-overlay.open .mobile-nav-link:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+.mobile-nav-overlay.open .mobile-nav-link:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.mobile-nav-overlay.open .mobile-nav-link:nth-child(3) {
+  transition-delay: 0.15s;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--brutal-text);
+  background: var(--brutal-bg-tertiary);
+}
+
+.hamburger-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--brutal-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  padding: 8px;
+  transition: all 0.2s ease;
+}
+
+.hamburger-btn:hover {
+  border-color: #3f3f46;
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: var(--brutal-text);
+  border-radius: 1px;
+  transition: all 0.25s ease;
+}
+
+.hamburger-btn.open span:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+
+.hamburger-btn.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 640px) {
+  .brutal-heading-xl {
+    font-size: clamp(32px, 10vw, 56px);
+  }
+
+  .brutal-heading-lg {
+    font-size: clamp(22px, 6vw, 36px);
+  }
+
+  .brutal-card {
+    padding: 20px;
+  }
+
+  .brutal-table {
+    font-size: 12px;
+  }
+
+  .brutal-table th,
+  .brutal-table td {
+    padding: 10px 12px;
   }
 }
