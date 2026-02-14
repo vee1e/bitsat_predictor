@@ -41,8 +41,6 @@ const PHOENIX_PATTERNS = [
 
 const MSC_PATTERNS = [
   /M\.?Sc\.?/i,
-  /economics/i,
-  /biological/i,
 ];
 
 function isBE(branchName: string): boolean {
@@ -80,6 +78,8 @@ function GraphPlot() {
   async function loadData() {
     setLoading(true);
     setError(null);
+    setGraphData(null);
+    setIsLoaded(false);
 
     const url = `${import.meta.env.VITE_API_URL}/graph?campus=${formData.campus}`;
     try {

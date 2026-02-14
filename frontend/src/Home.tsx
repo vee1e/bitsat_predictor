@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import GraphPlot from "./components/ui/GraphPlot";
 import PredictTable from "./components/ui/PredictTable";
@@ -241,6 +241,13 @@ const FAQ_ITEMS = [
 
 function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const contentRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const [contentHeights, setContentHeights] = useState<number[]>([]);
+
+  useEffect(() => {
+    const heights = contentRefs.current.map(ref => ref?.scrollHeight ?? 0);
+    setContentHeights(heights);
+  }, []);
 
   return (
     <div className="brutal-animate-up brutal-stagger-4">
@@ -267,11 +274,14 @@ function FaqSection() {
             <div
               className="transition-all duration-200 ease-in-out overflow-hidden"
               style={{
-                maxHeight: openIndex === i ? "200px" : "0px",
+                maxHeight: openIndex === i ? `${contentHeights[i] || 500}px` : "0px",
                 opacity: openIndex === i ? 1 : 0,
               }}
             >
-              <p className="brutal-text text-sm text-[var(--brutal-text-secondary)] px-4 md:px-5 pb-4 md:pb-5">
+              <p
+                ref={el => { contentRefs.current[i] = el; }}
+                className="brutal-text text-sm text-[var(--brutal-text-secondary)] px-4 md:px-5 pb-4 md:pb-5"
+              >
                 {item.a}
               </p>
             </div>

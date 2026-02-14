@@ -49,9 +49,15 @@ function PredictTable() {
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      setTable(data.length === 0 ? [] : data);
-      setRange([0, 4]);
-      setActivePage(1);
+      if (Array.isArray(data)) {
+        setTable(data.length === 0 ? [] : data);
+        setRange([0, 4]);
+        setActivePage(1);
+      } else {
+        console.warn("Unexpected response shape from API:", data);
+        setTable([]);
+        setError("Unexpected response from server. Please try again.");
+      }
     } catch (err) {
       console.error("Failed to load table data. Error: ", err);
       setError("Failed to fetch data. Please try again.");
@@ -89,7 +95,7 @@ function PredictTable() {
   return (
     <div className="w-full max-w-4xl mx-auto">
       {/* SELECTION PANEL - NO BORDER/SHADOW per instructions */}
-      <div className="bg-[var(--brutal-bg-secondary)]/60 backdrop-blur-xl border border-[var(--brutal-border)] rounded-[10px] p-6 mb-8 w-full">
+      <div className="bg-[var(--brutal-bg-secondary)] backdrop-blur-xl border border-[var(--brutal-border)] rounded-[10px] p-6 mb-8 w-full" style={{ backgroundColor: 'rgba(17, 17, 19, 0.6)' }}>
         <h2 className="brutal-heading-md mb-6 text-center">
           CHECK PREDICTIONS
         </h2>
